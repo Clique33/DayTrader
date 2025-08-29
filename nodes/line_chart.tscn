@@ -7,12 +7,23 @@ script = ExtResource("1_exuqm")
 initial_value = 1.0
 number_of_time_points = 48
 
+[node name="Background" type="ColorRect" parent="."]
+
 [node name="ValueLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="ValueAxis" type="Line2D" parent="."]
+width = 3.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="TimeAxis" type="Line2D" parent="."]
+width = 3.0
+default_color = Color(0, 0, 0, 1)
 
 [node name="StockLine" type="Line2D" parent="."]
-width = 6.0
+width = 3.0
 default_color = Color(0.921569, 0.352941, 0.239216, 1)
 joint_mode = 2
 round_precision = 19

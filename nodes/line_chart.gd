@@ -1,6 +1,7 @@
 extends Node2D
 class_name Chart
 
+@export var margin : int = 10
 @export var values_per_time : Array[float]
 @export_range(0,1000000,0.01) var initial_value : float
 @export_range(1,100000) var number_of_time_points : int:
@@ -13,6 +14,9 @@ class_name Chart
 @onready var stock_line: Line2D = $StockLine
 @onready var timer: Timer = $Timer
 @onready var value_label: Label = $ValueLabel
+@onready var value_axis: Line2D = $ValueAxis
+@onready var time_axis: Line2D = $TimeAxis
+@onready var background: ColorRect = $Background
 
 enum {LOST = 0, WON = 1}
 
@@ -67,10 +71,17 @@ func _ready() -> void:
 		_pixels_per_time_tick = get_viewport_rect().size.x/float(number_of_time_points)
 	if _pixels_per_value_tick == 0:
 		_pixels_per_value_tick = -get_viewport_rect().size.y/float(2*initial_value)
-	print(_pixels_per_value_tick)
-	_initial_x_offset = -get_viewport_rect().size.x/2
-	_initial_y_offset = get_viewport_rect().size.y/2
+	
+	_initial_x_offset = -get_viewport_rect().size.x/2 + margin
+	_initial_y_offset = get_viewport_rect().size.y/2 - margin
 	current_value = initial_value
+	
+	background.size = get_viewport_rect().size
+	background.global_position = Vector2(-get_viewport_rect().size.x/2,-get_viewport_rect().size.y/2)
+	value_axis.add_point(Vector2(_initial_x_offset,_initial_y_offset))
+	value_axis.add_point(Vector2(_initial_x_offset,-get_viewport_rect().size.y))
+	time_axis.add_point(Vector2(_initial_x_offset,_initial_y_offset))
+	time_axis.add_point(Vector2(get_viewport_rect().size.x,_initial_y_offset))
 
 func _physics_process(delta: float) -> void:
 	if stock_line.get_point_count() == len(values_per_time): 
