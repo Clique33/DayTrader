@@ -4,6 +4,8 @@
 
 [node name="LineChart" type="Node2D"]
 script = ExtResource("1_exuqm")
+initial_value = 1.0
+number_of_time_points = 48
 
 [node name="ValueLabel" type="Label" parent="."]
 offset_right = 40.0
