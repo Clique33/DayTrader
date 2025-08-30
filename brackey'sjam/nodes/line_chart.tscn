@@ -1,0 +1,149 @@
+[gd_scene load_steps=9 format=3 uid="uid://dr0lerip24mpr"]
+
+[ext_resource type="Script" uid="uid://yx4806mus5c4" path="res://nodes/line_chart.gd" id="1_exuqm"]
+[ext_resource type="Texture2D" uid="uid://c2qhygmyjuh1b" path="res://assets/UI_Flat_Banner04a.png" id="2_dy5ku"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_exuqm"]
+load_path = "res://.godot/imported/close_button.png-4ed5e0e83536e4154a07fcc7ddbf1ae9.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dy5ku"]
+load_path = "res://.godot/imported/close_button.png-4ed5e0e83536e4154a07fcc7ddbf1ae9.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_27o8u"]
+load_path = "res://.godot/imported/UI_Flat_Button01a_4.png-883e41fd7a900d618f585936a4dc7143.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uv71e"]
+load_path = "res://.godot/imported/UI_Flat_Button01a_1.png-32bb777787696c8982e34b75d5c59ea8.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ersot"]
+load_path = "res://.godot/imported/UI_Flat_Button01a_4.png-883e41fd7a900d618f585936a4dc7143.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fp0el"]
+load_path = "res://.godot/imported/UI_Flat_Button01a_1.png-32bb777787696c8982e34b75d5c59ea8.ctex"
+
+[node name="LineChart" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 100.0
+script = ExtResource("1_exuqm")
+initial_value = 79.55
+number_of_time_points = 48
+available_money = 1000.0
+
+[node name="Borders" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.585062, 0.585062, 0.585062, 1)
+
+[node name="MoveButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+action_mode = 0
+ignore_texture_size = true
+
+[node name="CloseButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 17.0
+offset_bottom = 15.0
+texture_normal = SubResource("CompressedTexture2D_exuqm")
+texture_pressed = SubResource("CompressedTexture2D_dy5ku")
+
+[node name="Background" type="ColorRect" parent="."]
+
+[node name="ValueAxis" type="Line2D" parent="."]
+width = 3.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="TimeAxis" type="Line2D" parent="."]
+width = 3.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="StockLine" type="Line2D" parent="."]
+width = 3.0
+default_color = Color(0.921569, 0.352941, 0.239216, 1)
+joint_mode = 2
+round_precision = 19
+antialiased = true
+
+[node name="ValueLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="BuyButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = SubResource("CompressedTexture2D_27o8u")
+texture_pressed = SubResource("CompressedTexture2D_uv71e")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BuyButton"]
+layout_mode = 0
+offset_right = 51.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "BUY"
+horizontal_alignment = 1
+
+[node name="SellButton" type="TextureButton" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = SubResource("CompressedTexture2D_ersot")
+texture_pressed = SubResource("CompressedTexture2D_fp0el")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="SellButton"]
+offset_right = 51.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "SELL"
+horizontal_alignment = 1
+
+[node name="InvestedValueFrame" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_dy5ku")
+
+[node name="Label" type="Label" parent="InvestedValueFrame"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AvailableValueFrame" type="TextureRect" parent="."]
+offset_right = 64.0
+offset_bottom = 40.0
+texture = ExtResource("2_dy5ku")
+
+[node name="Label" type="Label" parent="AvailableValueFrame"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Invested : $"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="button_down" from="MoveButton" to="." method="_on_move_button_button_down"]
+[connection signal="button_up" from="MoveButton" to="." method="_on_move_button_button_up"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="SellButton" to="." method="_on_sell_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
