@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3 uid="uid://bw4qe1ffj086v"]
+
+[ext_resource type="Texture2D" uid="uid://cua0b22wnff6b" path="res://assets/screensaver.jpg" id="1_my12u"]
+[ext_resource type="Script" uid="uid://d3vtqlgugmvso" path="res://desktop.gd" id="1_qcmjx"]
+[ext_resource type="PackedScene" uid="uid://dr0lerip24mpr" path="res://nodes/line_chart.tscn" id="1_x0l4i"]
+[ext_resource type="Texture2D" uid="uid://ys1sflurwg70" path="res://assets/chart_icon_selected.png" id="3_qcmjx"]
+[ext_resource type="Texture2D" uid="uid://bi72vgmgva5a6" path="res://assets/work_icon.png" id="4_wiyix"]
+[ext_resource type="Texture2D" uid="uid://ckq6nbmata78n" path="res://assets/work_icon_selected.png" id="5_6lsg3"]
+[ext_resource type="Texture2D" uid="uid://deqmweybb3v0e" path="res://assets/chat_icon.png" id="6_cmsrr"]
+[ext_resource type="Texture2D" uid="uid://b74p154bvorcq" path="res://assets/chat_icon_selected.png" id="7_otlag"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uh226"]
+load_path = "res://.godot/imported/chart_icon.png-f2d634c26852c74358572455c3631e0e.ctex"
+
+[node name="Desktop" type="Node2D"]
+script = ExtResource("1_qcmjx")
+
+[node name="DesktopUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScreenSaver" type="TextureRect" parent="DesktopUI"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_my12u")
+expand_mode = 1
+
+[node name="BottomPossibilities" type="ColorRect" parent="DesktopUI"]
+layout_mode = 0
+offset_top = 608.0
+offset_right = 1150.0
+offset_bottom = 648.0
+color = Color(0.584314, 0.584314, 0.584314, 1)
+
+[node name="IconsContainer" type="VBoxContainer" parent="DesktopUI"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 21.0
+offset_top = 29.0
+offset_right = 166.0
+offset_bottom = 595.0
+alignment = 1
+
+[node name="ChartButton" type="TextureButton" parent="DesktopUI/IconsContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = SubResource("CompressedTexture2D_uh226")
+texture_pressed = ExtResource("3_qcmjx")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="DesktopUI/IconsContainer"]
+layout_mode = 2
+text = "InvestApp"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="DesktopUI/IconsContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="WorkButton" type="TextureButton" parent="DesktopUI/IconsContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_wiyix")
+texture_pressed = ExtResource("5_6lsg3")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label2" type="Label" parent="DesktopUI/IconsContainer"]
+layout_mode = 2
+text = "WorkApp"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="DesktopUI/IconsContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="TalkButton" type="TextureButton" parent="DesktopUI/IconsContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("6_cmsrr")
+texture_pressed = ExtResource("7_otlag")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label3" type="Label" parent="DesktopUI/IconsContainer"]
+layout_mode = 2
+text = "ChatApp"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LineChart" parent="." instance=ExtResource("1_x0l4i")]
+visible = false
+
+[connection signal="pressed" from="DesktopUI/IconsContainer/ChartButton" to="." method="_on_chart_button_pressed"]

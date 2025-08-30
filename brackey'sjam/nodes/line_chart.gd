@@ -17,19 +17,19 @@ class_name Chart
 
 	
 
-@onready var stock_line: Line2D = $StockLine
-@onready var timer: Timer = $Timer
-@onready var value_label: Label = $ValueLabel
-@onready var value_axis: Line2D = $ValueAxis
-@onready var time_axis: Line2D = $TimeAxis
-@onready var background: ColorRect = $Background
-@onready var borders: ColorRect = $Borders
-@onready var close_button: TextureButton = $CloseButton
-@onready var move_button: TextureButton = $MoveButton
-@onready var buy_button: TextureButton = $BuyButton
-@onready var sell_button: TextureButton = $SellButton
-@onready var invested_value_frame: TextureRect = $InvestedValueFrame
-@onready var available_value_frame: TextureRect = $AvailableValueFrame
+@onready var stock_line: Line2D = $Chart/StockLine
+@onready var timer: Timer = $Chart/Timer
+@onready var value_label: Label = $Chart/ValueLabel
+@onready var value_axis: Line2D = $Chart/ValueAxis
+@onready var time_axis: Line2D = $Chart/TimeAxis
+@onready var invested_value_frame: TextureRect = $Chart/InvestedValueFrame
+@onready var available_value_frame: TextureRect = $Chart/AvailableValueFrame
+@onready var buy_button: TextureButton = $Chart/BuyButton
+@onready var sell_button: TextureButton = $Chart/SellButton
+@onready var background: ColorRect = $Window/Background
+@onready var borders: ColorRect = $Window/Borders
+@onready var close_button: TextureButton = $Window/CloseButton
+@onready var move_button: TextureButton = $Window/MoveButton
 
 enum {LOST = 0, WON = 1}
 

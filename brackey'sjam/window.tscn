@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://jhkjd11gma3c"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_exuqm"]
+load_path = "res://.godot/imported/close_button.png-4ed5e0e83536e4154a07fcc7ddbf1ae9.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dy5ku"]
+load_path = "res://.godot/imported/close_button.png-4ed5e0e83536e4154a07fcc7ddbf1ae9.ctex"
+
+[node name="Window" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Borders" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.585062, 0.585062, 0.585062, 1)
+
+[node name="MoveButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+action_mode = 0
+ignore_texture_size = true
+
+[node name="CloseButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 17.0
+offset_bottom = 15.0
+texture_normal = SubResource("CompressedTexture2D_exuqm")
+texture_pressed = SubResource("CompressedTexture2D_dy5ku")
+
+[node name="Background" type="ColorRect" parent="."]

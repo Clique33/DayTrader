@@ -33,49 +33,59 @@ initial_value = 79.55
 number_of_time_points = 48
 available_money = 1000.0
 
-[node name="Borders" type="ColorRect" parent="."]
+[node name="Window" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Borders" type="ColorRect" parent="Window"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.585062, 0.585062, 0.585062, 1)
 
-[node name="MoveButton" type="TextureButton" parent="."]
+[node name="MoveButton" type="TextureButton" parent="Window"]
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 action_mode = 0
 ignore_texture_size = true
 
-[node name="CloseButton" type="TextureButton" parent="."]
+[node name="CloseButton" type="TextureButton" parent="Window"]
 layout_mode = 0
 offset_right = 17.0
 offset_bottom = 15.0
 texture_normal = SubResource("CompressedTexture2D_exuqm")
 texture_pressed = SubResource("CompressedTexture2D_dy5ku")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="Window"]
 
-[node name="ValueAxis" type="Line2D" parent="."]
+[node name="Chart" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ValueAxis" type="Line2D" parent="Chart"]
 width = 3.0
 default_color = Color(0, 0, 0, 1)
 
-[node name="TimeAxis" type="Line2D" parent="."]
+[node name="TimeAxis" type="Line2D" parent="Chart"]
 width = 3.0
 default_color = Color(0, 0, 0, 1)
 
-[node name="StockLine" type="Line2D" parent="."]
+[node name="StockLine" type="Line2D" parent="Chart"]
 width = 3.0
 default_color = Color(0.921569, 0.352941, 0.239216, 1)
 joint_mode = 2
 round_precision = 19
 antialiased = true
 
-[node name="ValueLabel" type="Label" parent="."]
+[node name="ValueLabel" type="Label" parent="Chart"]
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 
-[node name="BuyButton" type="TextureButton" parent="."]
+[node name="BuyButton" type="TextureButton" parent="Chart"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -83,7 +93,7 @@ texture_normal = SubResource("CompressedTexture2D_27o8u")
 texture_pressed = SubResource("CompressedTexture2D_uv71e")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="BuyButton"]
+[node name="Label" type="Label" parent="Chart/BuyButton"]
 layout_mode = 0
 offset_right = 51.0
 offset_bottom = 28.0
@@ -92,14 +102,14 @@ theme_override_font_sizes/font_size = 20
 text = "BUY"
 horizontal_alignment = 1
 
-[node name="SellButton" type="TextureButton" parent="."]
+[node name="SellButton" type="TextureButton" parent="Chart"]
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = SubResource("CompressedTexture2D_ersot")
 texture_pressed = SubResource("CompressedTexture2D_fp0el")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="SellButton"]
+[node name="Label" type="Label" parent="Chart/SellButton"]
 offset_right = 51.0
 offset_bottom = 28.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -107,13 +117,13 @@ theme_override_font_sizes/font_size = 20
 text = "SELL"
 horizontal_alignment = 1
 
-[node name="InvestedValueFrame" type="TextureRect" parent="."]
+[node name="InvestedValueFrame" type="TextureRect" parent="Chart"]
 layout_mode = 0
-offset_right = 40.0
+offset_right = 64.0
 offset_bottom = 40.0
 texture = ExtResource("2_dy5ku")
 
-[node name="Label" type="Label" parent="InvestedValueFrame"]
+[node name="Label" type="Label" parent="Chart/InvestedValueFrame"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
@@ -122,12 +132,12 @@ theme_override_font_sizes/font_size = 11
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AvailableValueFrame" type="TextureRect" parent="."]
+[node name="AvailableValueFrame" type="TextureRect" parent="Chart"]
 offset_right = 64.0
 offset_bottom = 40.0
 texture = ExtResource("2_dy5ku")
 
-[node name="Label" type="Label" parent="AvailableValueFrame"]
+[node name="Label" type="Label" parent="Chart/AvailableValueFrame"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
@@ -137,13 +147,13 @@ text = "Invested : $"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="Chart"]
 wait_time = 0.5
 autostart = true
 
-[connection signal="button_down" from="MoveButton" to="." method="_on_move_button_button_down"]
-[connection signal="button_up" from="MoveButton" to="." method="_on_move_button_button_up"]
-[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]
-[connection signal="pressed" from="SellButton" to="." method="_on_sell_button_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="button_down" from="Window/MoveButton" to="." method="_on_move_button_button_down"]
+[connection signal="button_up" from="Window/MoveButton" to="." method="_on_move_button_button_up"]
+[connection signal="pressed" from="Window/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Chart/BuyButton" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="Chart/SellButton" to="." method="_on_sell_button_pressed"]
+[connection signal="timeout" from="Chart/Timer" to="." method="_on_timer_timeout"]
