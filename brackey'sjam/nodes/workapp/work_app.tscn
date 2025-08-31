@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=3 uid="uid://1nv81wg5rvqy"]
+
+[ext_resource type="Script" uid="uid://bbt8hjhelal3e" path="res://nodes/workapp/work_app.gd" id="1_5sa7y"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_exuqm"]
+load_path = "res://.godot/imported/close_button.png-4ed5e0e83536e4154a07fcc7ddbf1ae9.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dy5ku"]
+load_path = "res://.godot/imported/close_button.png-4ed5e0e83536e4154a07fcc7ddbf1ae9.ctex"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5sa7y"]
+bg_color = Color(0.972549, 0.6, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3b0op"]
+bg_color = Color(0.6, 0.878431, 0.6, 1)
+
+[node name="WorkApp" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 150.0
+offset_top = 150.0
+offset_right = 150.0
+offset_bottom = 150.0
+mouse_filter = 1
+script = ExtResource("1_5sa7y")
+
+[node name="Window" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Borders" type="ColorRect" parent="Window"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.585062, 0.585062, 0.585062, 1)
+
+[node name="MoveButton" type="TextureButton" parent="Window"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+action_mode = 0
+ignore_texture_size = true
+
+[node name="CloseButton" type="TextureButton" parent="Window"]
+layout_mode = 0
+offset_right = 17.0
+offset_bottom = 15.0
+texture_normal = SubResource("CompressedTexture2D_exuqm")
+texture_pressed = SubResource("CompressedTexture2D_dy5ku")
+
+[node name="Background" type="ColorRect" parent="Window"]
+layout_mode = 0
+
+[node name="Content" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TabContainer" type="TabContainer" parent="Content"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+current_tab = 0
+
+[node name="Job" type="VBoxContainer" parent="Content/TabContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_tab_index = 0
+
+[node name="EasyButton" type="Button" parent="Content/TabContainer/Job"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Do Job !"
+
+[node name="EasyProgressBar" type="ProgressBar" parent="Content/TabContainer/Job"]
+visible = false
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_5sa7y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3b0op")
+step = 0.2
+
+[node name="EasyTimer" type="Timer" parent="Content"]
+
+[node name="RewardLabel" type="Label" parent="Content"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(8.6154e-06, 0.759174, 3.85046e-07, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+
+[node name="Timer" type="Timer" parent="Content/RewardLabel"]
+one_shot = true
+
+[connection signal="button_down" from="Window/MoveButton" to="." method="_on_move_button_button_down"]
+[connection signal="button_up" from="Window/MoveButton" to="." method="_on_move_button_button_up"]
+[connection signal="pressed" from="Window/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Content/TabContainer/Job/EasyButton" to="." method="_on_easy_button_pressed"]
+[connection signal="timeout" from="Content/EasyTimer" to="." method="_on_easy_timer_timeout"]
+[connection signal="timeout" from="Content/RewardLabel/Timer" to="." method="_on_reward_timer_timeout"]

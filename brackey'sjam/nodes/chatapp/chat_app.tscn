@@ -1,0 +1,147 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb3tkrlqnyauo"]
+
+[ext_resource type="Script" uid="uid://dgo2pgofvske1" path="res://nodes/chatapp/chat_app.gd" id="1_8psf1"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_exuqm"]
+load_path = "res://.godot/imported/close_button.png-4ed5e0e83536e4154a07fcc7ddbf1ae9.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dy5ku"]
+load_path = "res://.godot/imported/close_button.png-4ed5e0e83536e4154a07fcc7ddbf1ae9.ctex"
+
+[node name="ChatApp" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 150.0
+offset_top = 100.0
+offset_right = 150.0
+offset_bottom = 100.0
+mouse_filter = 1
+script = ExtResource("1_8psf1")
+
+[node name="Window" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Borders" type="ColorRect" parent="Window"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.585062, 0.585062, 0.585062, 1)
+
+[node name="MoveButton" type="TextureButton" parent="Window"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+action_mode = 0
+ignore_texture_size = true
+
+[node name="CloseButton" type="TextureButton" parent="Window"]
+layout_mode = 0
+offset_right = 17.0
+offset_bottom = 15.0
+texture_normal = SubResource("CompressedTexture2D_exuqm")
+texture_pressed = SubResource("CompressedTexture2D_dy5ku")
+
+[node name="Background" type="ColorRect" parent="Window"]
+layout_mode = 0
+
+[node name="Content" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ContactsContainer" type="ScrollContainer" parent="Content"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ContactsVBox" type="VBoxContainer" parent="Content/ContactsContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Content/ContactsContainer/ContactsVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(1, 0.00392157, 1, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Content/ContactsContainer/ContactsVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(1, 0.00392157, 1, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Content/ContactsContainer/ContactsVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(1, 0.00392157, 1, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Content/ContactsContainer/ContactsVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(1, 0.00392157, 1, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="Content/ContactsContainer/ContactsVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(1, 0.00392157, 1, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="Content/ContactsContainer/ContactsVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(1, 0.00392157, 1, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="Content/ContactsContainer/ContactsVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(1, 0.00392157, 1, 1)
+
+[node name="ChatContainer" type="ScrollContainer" parent="Content"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ChatVBox" type="VBoxContainer" parent="Content/ChatContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Content/ChatContainer/ChatVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.0392157, 1, 1, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Content/ChatContainer/ChatVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.0392157, 1, 1, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Content/ChatContainer/ChatVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.0392157, 1, 1, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Content/ChatContainer/ChatVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.0392157, 1, 1, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="Content/ChatContainer/ChatVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.0392157, 1, 1, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="Content/ChatContainer/ChatVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.0392157, 1, 1, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="Content/ChatContainer/ChatVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.0392157, 1, 1, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="Content/ChatContainer/ChatVBox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.0392157, 1, 1, 1)
+
+[connection signal="button_down" from="Window/MoveButton" to="." method="_on_move_button_button_down"]
+[connection signal="button_up" from="Window/MoveButton" to="." method="_on_move_button_button_up"]
+[connection signal="pressed" from="Window/CloseButton" to="." method="_on_close_button_pressed"]

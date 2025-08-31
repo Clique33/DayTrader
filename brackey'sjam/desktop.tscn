@@ -1,21 +1,71 @@
-[gd_scene load_steps=10 format=3 uid="uid://bw4qe1ffj086v"]
+[gd_scene load_steps=18 format=3 uid="uid://bw4qe1ffj086v"]
 
 [ext_resource type="Texture2D" uid="uid://cua0b22wnff6b" path="res://assets/screensaver.jpg" id="1_my12u"]
 [ext_resource type="Script" uid="uid://d3vtqlgugmvso" path="res://desktop.gd" id="1_qcmjx"]
-[ext_resource type="PackedScene" uid="uid://dr0lerip24mpr" path="res://nodes/line_chart.tscn" id="1_x0l4i"]
+[ext_resource type="PackedScene" uid="uid://dr0lerip24mpr" path="res://nodes/investapp/invest_app.tscn" id="1_x0l4i"]
 [ext_resource type="Texture2D" uid="uid://ys1sflurwg70" path="res://assets/chart_icon_selected.png" id="3_qcmjx"]
 [ext_resource type="Texture2D" uid="uid://bi72vgmgva5a6" path="res://assets/work_icon.png" id="4_wiyix"]
 [ext_resource type="Texture2D" uid="uid://ckq6nbmata78n" path="res://assets/work_icon_selected.png" id="5_6lsg3"]
 [ext_resource type="Texture2D" uid="uid://deqmweybb3v0e" path="res://assets/chat_icon.png" id="6_cmsrr"]
 [ext_resource type="Texture2D" uid="uid://b74p154bvorcq" path="res://assets/chat_icon_selected.png" id="7_otlag"]
+[ext_resource type="Script" uid="uid://cwovsllnuioi3" path="res://desktop_windows.gd" id="8_6f7av"]
+[ext_resource type="Texture2D" uid="uid://csuc06jaf0uc0" path="res://assets/trophy.png" id="8_r8dgl"]
+[ext_resource type="PackedScene" uid="uid://1nv81wg5rvqy" path="res://nodes/workapp/work_app.tscn" id="9_otlag"]
+[ext_resource type="PackedScene" uid="uid://bb3tkrlqnyauo" path="res://nodes/chatapp/chat_app.tscn" id="10_kjnmq"]
+[ext_resource type="AudioStream" uid="uid://bvyd10k5d1b41" path="res://assets/20 - The Journey.mp3" id="13_majww"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uh226"]
 load_path = "res://.godot/imported/chart_icon.png-f2d634c26852c74358572455c3631e0e.ctex"
 
+[sub_resource type="Animation" id="Animation_e4aos"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-40.0]
+}
+
+[sub_resource type="Animation" id="Animation_majww"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-40.0, -18.457]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yu0yj"]
+_data = {
+&"RESET": SubResource("Animation_e4aos"),
+&"new_animation": SubResource("Animation_majww")
+}
+
 [node name="Desktop" type="Node2D"]
 script = ExtResource("1_qcmjx")
+initial_balance = 1000.0
+
+[node name="InitialTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="DefeatTimer" type="Timer" parent="."]
+wait_time = 1.2
 
 [node name="DesktopUI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -86,7 +136,8 @@ custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 color = Color(1, 1, 1, 0)
 
-[node name="TalkButton" type="TextureButton" parent="DesktopUI/IconsContainer"]
+[node name="ChatButton" type="TextureButton" parent="DesktopUI/IconsContainer"]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -96,12 +147,132 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label3" type="Label" parent="DesktopUI/IconsContainer"]
+visible = false
 layout_mode = 2
 text = "ChatApp"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LineChart" parent="." instance=ExtResource("1_x0l4i")]
+[node name="VictoryButton" type="TextureButton" parent="DesktopUI/IconsContainer"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("8_r8dgl")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="VictoryLabel" type="Label" parent="DesktopUI/IconsContainer"]
+visible = false
+layout_mode = 2
+text = "Victory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Clock" type="Label" parent="DesktopUI"]
+layout_mode = 0
+offset_left = 1003.0
+offset_top = 612.0
+offset_right = 1138.0
+offset_bottom = 640.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 19
+text = "Day 1 00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClockTimer" type="Timer" parent="DesktopUI"]
+wait_time = 0.2
+
+[node name="Windows" type="Node" parent="."]
+script = ExtResource("8_6f7av")
+
+[node name="InvestApp" parent="Windows" instance=ExtResource("1_x0l4i")]
+visible = false
+offset_left = 150.0
+offset_top = 150.0
+offset_right = 150.0
+offset_bottom = 150.0
+tick_time = 1.6
+number_of_time_points = 180
+
+[node name="WorkApp" parent="Windows" instance=ExtResource("9_otlag")]
+visible = false
+offset_left = 175.0
+offset_top = 175.0
+offset_right = 175.0
+offset_bottom = 175.0
+
+[node name="ChatApp" parent="Windows" instance=ExtResource("10_kjnmq")]
+visible = false
+offset_left = 200.0
+offset_top = 200.0
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="VictoryTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Victory" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_majww")
+volume_db = -40.0
+
+[node name="AnimationTree" type="AnimationPlayer" parent="Victory"]
+libraries = {
+&"": SubResource("AnimationLibrary_yu0yj")
+}
+
+[node name="DefeatScreen" type="CanvasLayer" parent="."]
 visible = false
 
+[node name="CanvasModulate" type="CanvasModulate" parent="DefeatScreen"]
+color = Color(1, 1, 1, 0)
+
+[node name="TextureRect" type="ColorRect" parent="DefeatScreen"]
+offset_right = 1153.0
+offset_bottom = 647.0
+color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="YouLoseLabel" type="Label" parent="DefeatScreen"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.890196, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 36
+
+[node name="InitialScreen" type="CanvasLayer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="InitialScreen"]
+
+[node name="TextureRect" type="ColorRect" parent="InitialScreen"]
+offset_right = 1153.0
+offset_bottom = 647.0
+color = Color(0.0430392, 0.0430392, 0.0430392, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="InitialLabel" type="Label" parent="InitialScreen"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+
+[connection signal="timeout" from="InitialTimer" to="." method="_on_initial_timer_timeout"]
+[connection signal="timeout" from="DefeatTimer" to="." method="_on_defeat_timer_timeout"]
 [connection signal="pressed" from="DesktopUI/IconsContainer/ChartButton" to="." method="_on_chart_button_pressed"]
+[connection signal="pressed" from="DesktopUI/IconsContainer/WorkButton" to="." method="_on_work_button_pressed"]
+[connection signal="pressed" from="DesktopUI/IconsContainer/ChatButton" to="." method="_on_chat_button_pressed"]
+[connection signal="pressed" from="DesktopUI/IconsContainer/VictoryButton" to="." method="_on_victory_button_pressed"]
+[connection signal="timeout" from="DesktopUI/ClockTimer" to="." method="_on_clock_timer_timeout"]
+[connection signal="money_moved" from="Windows/InvestApp" to="." method="_on_invest_app_money_moved"]
+[connection signal="moved" from="Windows/InvestApp" to="." method="_on_chart_button_pressed"]
+[connection signal="moved" from="Windows/WorkApp" to="." method="_on_work_button_pressed"]
+[connection signal="reward" from="Windows/WorkApp" to="." method="_on_work_app_reward"]
+[connection signal="moved" from="Windows/ChatApp" to="." method="_on_chat_button_pressed"]
+[connection signal="timeout" from="VictoryTimer" to="." method="_on_victory_timer_timeout"]
